@@ -41,15 +41,17 @@ def registro1():
                                         ingd integer,
                                         fecha text,
                                         monto integer,
-                                        tipo text,
+                                        tipo text
                                     );'''
                        )
-                cur.execute('''INSERT INTO usuario (ci,) VALUES (?,);''', datos )
+                print("FSdaf")
+                cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
             
                 con.commit()   
              
-        except:
+        except sql.DatabaseError as e:
             con.rollback()
+            print(e)
 
         finally:
             con.close()# cerramos la conexion de la base de datos 
