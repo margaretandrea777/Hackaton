@@ -1,17 +1,23 @@
 from flask import Flask, render_template, request 
+import sqlite3 as sql
 app=Flask(__name__)
 
+
+nombre_db="basedatos.db"
 @app.route("/")
 def render_html():
     return render_template("bienvenida.html")
+
+def lista():
+    return []
 
 @app.route("/index")
 def render1():
     return render_template("index.html")
 
 
-@app.route("/registro", methods=['POST'])
-def reg():
+@app.route("/registro2", methods=['POST'])
+def registro2():
     return render_template("index.html")
 
 @app.route('/registro1', methods=['POST','GET'])      # aca es para registrar al animal
@@ -23,6 +29,7 @@ def registro1():
             print(datos)
             with sql.connect(nombre_db) as con:        
                 cur = con.cursor()
+                print("Hola")
                 cur.execute('''CREATE TABLE IF NOT EXISTS usuario (
                                         ci integer ,
                                         nombre text,
@@ -37,7 +44,7 @@ def registro1():
                                         tipo text,
                                     );'''
                        )
-                cur.execute('''INSERT INTO usuario (ci) VALUES (?,);''', datos )
+                cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
             
                 con.commit()   
              
@@ -46,8 +53,8 @@ def registro1():
 
         finally:
             con.close()# cerramos la conexion de la base de datos 
-            js=lista()   #retornamos datos de la db para el form del lado del cliente
-            return render_template('registro.html',dato=js)
+            #js=lista()   #retornamos datos de la db para el form del lado del cliente
+            return render_template('3ra.html')
             
 
 @app.route("/2da.html")
