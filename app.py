@@ -6,12 +6,12 @@ def render_html():
     return render_template("bienvenida.html")
 
 @app.route("/index")
-def render_index():
+def render1():
     return render_template("index.html")
 
 
-@app.route("/registro", methods)
-def render_index():
+@app.route("/registro", methods=['POST'])
+def reg():
     return render_template("index.html")
 
 @app.route('/registro2', methods=['POST','GET'])      # aca es para registrar al animal
@@ -45,7 +45,7 @@ def registro():
             
 
 @app.route("/2da.html")
-def render_index():
+def render_index1():
     return render_template("2da.html")
 
 @app.route("/3ra.html")
