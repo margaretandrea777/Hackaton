@@ -3,7 +3,7 @@ import sqlite3 as sql
 app=Flask(__name__)
 
 
-nombre_db="basedatos.db"
+nombre_db="basedatos1.db"
 @app.route("/")
 def render_html():
     return render_template("bienvenida.html")
@@ -33,18 +33,18 @@ def registro1():
                 cur.execute('''CREATE TABLE IF NOT EXISTS usuario (
                                         ci integer ,
                                         nombre text,
-                                        numeroT interger,                                        
+                                        numeroT integer,                                        
                                         profesion text,
                                         ciudad text,
-                                        celular interger,
-                                        gastosd interger,
-                                        ingd interger,
+                                        celular integer,
+                                        gastosd integer,
+                                        ingd integer,
                                         fecha text,
-                                        monto interger,
+                                        monto integer,
                                         tipo text,
                                     );'''
                        )
-                cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
+                cur.execute('''INSERT INTO usuario (ci,) VALUES (?,);''', datos )
             
                 con.commit()   
              
