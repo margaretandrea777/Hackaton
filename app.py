@@ -44,3 +44,10 @@ def registro():
             return render_template('registro.html',dato=js)
             
 
+@app.route("/2da.html")
+def render_index():
+    return render_template("2da.html")
+
+@app.route("/3ra.html")
+def render_inde():
+    return render_template("3ra.html")
