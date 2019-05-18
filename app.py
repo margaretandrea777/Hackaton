@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request 
 app=Flask(__name__)
 
 @app.route("/")
@@ -14,21 +14,27 @@ def render1():
 def reg():
     return render_template("index.html")
 
-@app.route('/registro2', methods=['POST','GET'])      # aca es para registrar al animal
-def registro():
+@app.route('/registro1', methods=['POST','GET'])      # aca es para registrar al animal
+def registro1():
     if request.method=='POST':   
         try:
             ci=request.form['ci']                             #identificativo del animal
             datos=[ci]  # esto es para meter en la db luego
+            print(datos)
             with sql.connect(nombre_db) as con:        
                 cur = con.cursor()
                 cur.execute('''CREATE TABLE IF NOT EXISTS usuario (
                                         ci integer ,
-                                        NumeroT interger,                                        
-                                        Gastos integer,
-                                        ,
-                                        Ultimafecha text,
-                                        Vacunas text
+                                        nombre text,
+                                        numeroT interger,                                        
+                                        profesion text,
+                                        ciudad text,
+                                        celular interger,
+                                        gastosd interger,
+                                        ingd interger,
+                                        fecha text,
+                                        monto interger,
+                                        tipo text,
                                     );'''
                        )
                 cur.execute('''INSERT INTO usuario (ci) VALUES (?,);''', datos )
