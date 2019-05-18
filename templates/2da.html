@@ -2,10 +2,13 @@
     <header class="masthead d-flex">
         <div class="container text-center my-auto">
           <h1 class="mb-1">Emoi ape nde Ci</h1>
-          <input type="text" id="form1" class="form-control">
-          <label for="form1">Cedula de Identidad</label>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
+          <form class="login100-form validate-form" action="{{ url_for('registro1')}}" method="POST">
+              <input type="text" id="form1" class="form-control">
+              <label for="form1">Cedula de Identidad</label>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+    
+      </form>
+    </div>
         <div class="overlay"></div>
       </header>
     
