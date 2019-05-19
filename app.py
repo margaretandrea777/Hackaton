@@ -172,3 +172,7 @@ def render_index1():
 @app.route("/3ra.html")
 def render_inde():
     return render_template("3ra.html")
+
+@app.route("/4ta.html")
+def render_ind():
+    return render_template("4ta.html")
