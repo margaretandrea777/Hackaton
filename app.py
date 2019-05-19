@@ -3,20 +3,18 @@ import sqlite3 as sql
 app=Flask(__name__)
 
 
-nombre_db="basedatos2.db"
+nombre_db="basedatos3.db"
 @app.route("/")
 def render_html():
     return render_template("bienvenida.html")
 
-def lista():
-    return []
 
 @app.route("/index")
 def render1():
     return render_template("index.html")
 
 
-@app.route("/registro2", methods=['POST'])
+@app.route("/registro222", methods=['POST'])
 def registrohtml2():
     return render_template("index.html")
 
@@ -31,6 +29,7 @@ def registro1():
                 cur = con.cursor()
                 print("Hola")
                 cur.execute('''CREATE TABLE IF NOT EXISTS usuario (
+                                        ID INTEGER PRIMARY KEY AUTOINCREMENT,
                                         ci integer ,
                                         nombre text,
                                         numeroT integer,                                        
@@ -46,7 +45,7 @@ def registro1():
                        )
                 print("FSdaf")
                 cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
-            
+                
                 con.commit()   
              
         except sql.DatabaseError as e:
@@ -69,7 +68,7 @@ def registro2():
             ciudad=request.form['ciudad']
             telefono=request.form['telefono']
                                         #identificativo del animal
-            datos=[nombre,profesion,ciudad,telefono]  # esto es para meter en la db luego
+            datos=[nombre,telefono,profesion,ciudad]  # esto es para meter en la db luego
             print(datos)
             with sql.connect(nombre_db) as con:        
                 cur = con.cursor()
@@ -90,8 +89,30 @@ def registro2():
                                     );'''
                        )
                 print("FSdaf")
-                cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
-            
+                sent='''INSERT INTO usuario (nombre,numeroT,profesion,ciudad) VALUES (?,?,?,?);''', datos 
+                print(sent)
+                #cur.execute('''INSERT INTO usuario (nombre,numeroT,profesion,ciudad) VALUES (?,?,?,?);''', datos )
+                #pedimos el ultimo ci que agregamos 
+                cedulas=lista()
+                ultimoelemento=len(cedulas) -1 #obtenemos el tamaño de las cedulas
+                #debemos elegir el ultimo 
+                ultimo=cedulas[ultimoelemento]  
+                print("La ultima cedula es",ultimo)
+                dic={'ci': ultimo,
+                    'nombre': nombre, 
+                     'numeroT': telefono, 
+                      'profesion': profesion, 
+                      'ciudad': ciudad}
+                sentencia=''' UPDATE usuario SET     ci='{0}',
+                                                     nombre= '{1}',
+                                                    numeroT= '{2}',
+                                                    profesion= '{3}',
+                                                    ciudad= '{4}' 
+                                                    where ci='{0}' '''.format(str(ultimo),str(nombre),str(telefono),str(profesion),str(ciudad))
+                datos=[str(ultimo),nombre,telefono,profesion,ciudad]  # esto es para meter en la db luego
+               # sentencia1='''UPDATE usuario (ci,nombre,numeroT,profesion,ciudad) VALUES (?,?,?,?,?) where ci='5427222';''', datos 
+                print(sentencia)
+                cur.execute(sentencia)
                 con.commit()   
              
         except sql.DatabaseError as e:
@@ -105,6 +126,41 @@ def registro2():
             
 
 
+def lista():
+   try:
+       con = sql.connect(nombre_db)
+       con.row_factory = sql.Row  
+       cur = con.cursor()
+       cur.execute("select * from usuario")
+       dato = cur.fetchall()     #cargamos toda la info de la db en la variable dato
+       cedulas=[]                   #lista para almacenar datos de razas 
+ 
+       
+       for a in dato:
+          cedulas.append(a[1])   #usamos la posicion 1 ya que ahi se encuentran las nombres
+
+       
+       return cedulas
+   except:            #si tiene problemas puede ser porque no existe la base de datos
+       with sql.connect(nombre_db) as con:        
+           cur = con.cursor()
+           cur.execute('''CREATE TABLE IF NOT EXISTS usuario (
+                                        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        ci integer ,
+                                        nombre text,
+                                        numeroT integer,                                        
+                                        profesion text,
+                                        ciudad text,
+                                        celular integer,
+                                        gastosd integer,
+                                        ingd integer,
+                                        fecha text,
+                                        monto integer,
+                                        tipo text
+                                    );'''
+                       )
+       cedulas=[]
+       return  cedulas
 
 
 
