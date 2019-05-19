@@ -112,8 +112,24 @@ def registro3():
         finally:
             con.close()# cerramos la conexion de la base de datos 
             #js=lista()   #retornamos datos de la db para el form del lado del cliente
-            total=int(ingresos)/int(cantidad)
-            return render_template('6ta.html',cantidad=total)
+            total=int(ingresos)
+
+            totalUrbano = int(cantidad) * 500000
+            totalRural = int(cantidad) * 350000
+
+            estado = "bien"
+
+            if zona == "urbana":
+                if total < totalUrbano:
+                    estado = "mal"
+            elif zona == "rural":
+                if total < totalRural:
+                    estado = "mal"
+
+            print("total1",total)
+            print("total2",totalUrbano)
+            print(estado)
+            return render_template('6ta.html',cantidad=total, estado=estado)
             
 
 
