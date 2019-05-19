@@ -177,7 +177,7 @@ def registro2():
         finally:
             con.close()# cerramos la conexion de la base de datos 
             #js=lista()   #retornamos datos de la db para el form del lado del cliente
-            return render_template('3ra.html')
+            return render_template('5ta.html')
             
 
 
