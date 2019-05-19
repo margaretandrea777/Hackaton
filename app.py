@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request 
 import sqlite3 as sql
-app=Flask(__name__)
+
+app=Flask(__name__,static_url_path='')
 
 
 nombre_db="basedatos4.db"
@@ -102,6 +103,13 @@ def registro3():
             #js=lista()   #retornamos datos de la db para el form del lado del cliente
             return render_template('3ra.html')
             
+
+
+
+
+
+
+
 
 @app.route('/registro2', methods=['POST','GET'])      # aca es para registrar al animal
 def registro2():
@@ -226,3 +234,7 @@ def render_inde():
 @app.route("/4ta.html")
 def render_ind():
     return render_template("4ta.html")
+
+@app.route("/5ta.html")
+def render_in():
+    return render_template("5ta.html")

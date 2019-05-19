@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <H1 align="center">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bienvenidos a Platahetapp</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">:)</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Mboy peĩ pende rógape"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Ingresos"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="pass" id="pass" placeholder="Zona"/>
+                            </div>
+                            
+                            
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Eike"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="data:image/png;base64,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" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">Aikema'akue</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        
+                    </div>
+
+                    <div class="signin-form">
+                        
+
+    </div>
+
+    <!-- JS -->
+    <script src="{{url_for ('static', filename ='vendor/jquery/jquery.min.js' )}}"></script>
+    <script src="js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</H1>
+</html>
