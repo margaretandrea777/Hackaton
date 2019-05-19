@@ -65,8 +65,10 @@ def registro1():
 def registro3():
     if request.method=='POST':   
         try:
-            ci=request.form['ci']                             #identificativo del animal
-            datos=[ci]  # esto es para meter en la db luego
+            cantidad=request.form['cantidad'] 
+            ingresos=request.form['ingresos']                          #identificativo del animal
+            zona=request.form['zona']
+            datos=[cantidad,ingresos,zona]  # esto es para meter en la db luego
             print(datos)
             with sql.connect(nombre_db) as con:        
                 cur = con.cursor()
@@ -90,8 +92,17 @@ def registro3():
                                     );'''
                        )
                 print("FSdaf")
-                cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
-                
+                #cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
+                cedulas=lista()
+                ultimoelemento=len(cedulas) -1 #obtenemos el tamaño de las cedulas
+                #debemos elegir el ultimo 
+                ultimo=cedulas[ultimoelemento]  
+                sentencia=''' UPDATE usuario SET     cantper='{1}',
+                                                     ingresosm= '{2}',
+                                                     zona= '{3}' 
+                                                     where ci='{0}' '''.format(str(ultimo),str(cantidad),str(ingresos),str(zona))
+                print(sentencia)
+                cur.execute(sentencia)
                 con.commit()   
              
         except sql.DatabaseError as e:
@@ -101,7 +112,8 @@ def registro3():
         finally:
             con.close()# cerramos la conexion de la base de datos 
             #js=lista()   #retornamos datos de la db para el form del lado del cliente
-            return render_template('3ra.html')
+            total=int(ingresos)/int(cantidad)
+            return render_template('6ta.html',cantidad=total)
             
 
 
