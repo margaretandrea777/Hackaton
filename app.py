@@ -238,3 +238,7 @@ def render_ind():
 @app.route("/5ta.html")
 def render_in():
     return render_template("5ta.html")
+
+@app.route("/6ta.html")
+def render_i():
+    return render_template("6ta.html")
