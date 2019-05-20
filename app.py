@@ -185,23 +185,24 @@ def registro4():
                 print(sentencia)
                 cur.execute(sentencia)
                 con.commit()
+        except sql.DatabaseError as e:
+            con.rollback()
+            print(e)
+
+        finally:
+            con.close()# cerramos la conexion de la base de datos 
+            #js=lista()   #retornamos datos de la db para el form del lado del cliente
+            return render_template('5ta.html')
 
 
-
-
-
-
-
-
-@app.route('/registro2', methods=['POST','GET'])      # aca es para registrar al animal
+@app.route ('/registro2', methods=['POST','GET'])
 def registro2():
     if request.method=='POST':   
         try:
             nombre=request.form['nombre'] 
             profesion=request.form['profesion']
             ciudad=request.form['ciudad']
-            telefono=request.form['telefono']
-                                        #identificativo del animal
+            telefono=request.form['telefono']  #identificativo del animal
             datos=[nombre,telefono,profesion,ciudad]  # esto es para meter en la db luego
             print(datos)
             with sql.connect(nombre_db) as con:        
