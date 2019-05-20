@@ -10,6 +10,26 @@ background:#FFF !important;
 font-family: 'Roboto', sans-serif;
 
 }
+.semaforo{
+	width: 50px;
+	height: 50px;
+	border: 1px solid black;
+	margin: 1em;
+	border-radius: 50%;
+}
+
+.rojo{
+  background: red
+}
+
+.amarillo{
+  background: yellow
+}
+
+.verde{
+  background: green
+}
+
 td.fc-today {
 	background:#FFF !important;
 	position: relative;
