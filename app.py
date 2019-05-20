@@ -329,3 +329,7 @@ def render_i():
 @app.route("/7ma.html")
 def render_():
     return render_template("7ma.html")
+
+@app.route("/8va.html")
+def render():
+    return render_template("8va.html")
