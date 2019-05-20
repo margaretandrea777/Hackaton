@@ -4,7 +4,7 @@ import sqlite3 as sql
 app=Flask(__name__,static_url_path='')
 
 
-nombre_db="basedatos4.db"
+nombre_db="basedatos5.db"
 @app.route("/")
 def render_html():
     return render_template("bienvenida.html")
@@ -14,11 +14,11 @@ def render_html():
 def render1():
     return render_template("index.html")
 
-
+"""
 @app.route("/registro2", methods=['POST'])
 def registrohtml2():
     return render_template("index.html")
-
+"""
 @app.route('/registro1', methods=['POST','GET'])      # aca es para registrar al animal
 def registro1():
     if request.method=='POST':   
@@ -139,16 +139,13 @@ def registro3():
 def registro4():
     if request.method=='POST':   
         try:
-            mes=request.form['mes']
+            ingresomes=request.form['mes']
             alimentacion=request.form['alimentacion']
             servicios=request.form['servicios']
             otros=request.form['otros']
             suma=int(alimentacion)+int(servicios)+int(otros)
-            cantidad=request.form['cantidad'] 
-            ingresos=request.form['ingresos']                          #identificativo del animal
-            zona=request.form['zona']
-              # suma=alimentacion + servicios+otros
-            datos=[cantidad,ingresos,zona]  # esto es para meter en la db luego
+            # suma=alimentacion + servicios+otros
+            datos=[ingresomes,suma]  # esto es para meter en la db luego
          
             print(datos)
             with sql.connect(nombre_db) as con:        
@@ -164,7 +161,7 @@ def registro4():
                                         cantper integer,
                                         gastosm integer,
                                         gastosd integer,
-                                        ingresosm interger,
+                                        ingresosm integer,
                                         ingresosd integer,
                                         zona text,
                                         fecha text,
@@ -178,10 +175,9 @@ def registro4():
                 ultimoelemento=len(cedulas) -1 #obtenemos el tamaño de las cedulas
                 #debemos elegir el ultimo 
                 ultimo=cedulas[ultimoelemento]  
-                sentencia=''' UPDATE usuario SET     cantper='{1}',
-                                                     ingresosm= '{2}',
-                                                     zona= '{3}' 
-                                                     where ci='{0}' '''.format(str(ultimo),str(cantidad),str(ingresos),str(zona))
+                sentencia=''' UPDATE usuario SET     gastosm= '{1}',
+                                                     ingresosm= '{2}'
+                                                     where ci='{0}' '''.format(str(ultimo),str(suma),str(ingresomes))
                 print(sentencia)
                 cur.execute(sentencia)
                 con.commit()
@@ -192,7 +188,9 @@ def registro4():
         finally:
             con.close()# cerramos la conexion de la base de datos 
             #js=lista()   #retornamos datos de la db para el form del lado del cliente
-            return render_template('5ta.html')
+            contenido = {"tip1":"Ahorra mas", "tip2":"Cuidado!! "}
+            return render_template('7ma.html', conte=contenido)
+
 
 
 @app.route ('/registro2', methods=['POST','GET'])
@@ -232,6 +230,7 @@ def registro2():
                 #cur.execute('''INSERT INTO usuario (nombre,numeroT,profesion,ciudad) VALUES (?,?,?,?);''', datos )
                 #pedimos el ultimo ci que agregamos 
                 cedulas=lista()
+                print("######## ", cedulas)
                 ultimoelemento=len(cedulas) -1 #obtenemos el tamaño de las cedulas
                 #debemos elegir el ultimo 
                 ultimo=cedulas[ultimoelemento]  
