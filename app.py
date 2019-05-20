@@ -118,8 +118,8 @@ def registro3():
             #js=lista()   #retornamos datos de la db para el form del lado del cliente
             total=int(ingresos)/int(cantidad)
 
-            totalUrbano = int(cantidad) * 500000
-            totalRural = int(cantidad) * 350000
+            totalUrbano = int(cantidad) * 664297
+            totalRural = int(cantidad) * 256881
 
             estado = "bien"
 
@@ -324,3 +324,7 @@ def render_in():
 @app.route("/6ta.html")
 def render_i():
     return render_template("6ta.html")
+
+@app.route("/7ma.html")
+def render_():
+    return render_template("7ma.html")

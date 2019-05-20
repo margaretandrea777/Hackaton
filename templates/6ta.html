@@ -1,10 +1,23 @@
 {% include 'head.html' %}
-<body>
-	<div class="semaforo rojo"></div>
-	<div class="semaforo amarillo"></div>
-	<div class="semaforo verde"></div>
-    {{cantidad}}
-    {{estado}}
+<body background="https://image.flaticon.com/icons/png/512/43/43363.png">
+    <div class="bd-example" style="margin-top:25%">
+
+    <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Ingreso p/ persona</th>
+                <th scope="col">Mba'éicha peĩ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{cantidad}}</td>
+                <td>{{estado}}</td>
+              </tr>
+            </tbody>
+    </table>
+    </div>
+
 </body>
 </html>
 
