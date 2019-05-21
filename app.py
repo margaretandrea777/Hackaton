@@ -310,6 +310,8 @@ def semaforo():
             contenido = {"tip1":"Ahorra mas", "tip2":"Cuidado!! "}
             return render_template('semaforo.html', conte=contenido)
     else:
+        contenido = {"tip1":"Ahorra mas", "tip2":"Cuidado!! "}
+
         return render_template('semaforo.html', conte=contenido)
 
 
