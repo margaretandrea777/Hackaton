@@ -261,6 +261,58 @@ def registro2():
             #js=lista()   #retornamos datos de la db para el form del lado del cliente
             return render_template('5ta.html')
             
+@app.route('/semaforo', methods=['POST','GET'])      # aca es para registrar al animal
+def semaforo():
+    if request.method=='POST':   
+        try:
+            ci=request.form['ci']  
+            print(datos)
+            with sql.connect(nombre_db) as con:        
+                cur = con.cursor()
+                print("Hola")
+                cur.execute('''CREATE TABLE IF NOT EXISTS usuario (
+                                        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        ci integer,
+                                        nombre text,
+                                        numeroT integer,                                        
+                                        profesion text,
+                                        ciudad text,
+                                        cantper integer,
+                                        gastosm integer,
+                                        gastosd integer,
+                                        ingresosm integer,
+                                        ingresosd integer,
+                                        zona text,
+                                        fecha text,
+                                        monto integer,
+                                        tipo text
+                                    );'''
+                       )
+                print("FSdaf")
+                #cur.execute('''INSERT INTO usuario (ci) VALUES (?);''', datos )
+                cedulas=lista()
+                ultimoelemento=len(cedulas) -1 #obtenemos el tamaño de las cedulas
+                #debemos elegir el ultimo 
+                ultimo=cedulas[ultimoelemento]  
+                sentencia=''' UPDATE usuario SET     gastosm= '{1}',
+                                                     ingresosm= '{2}'
+                                                     where ci='{0}' '''.format(str(ultimo),str(suma),str(ingresomes))
+                print(sentencia)
+                cur.execute(sentencia)
+                con.commit()
+        except sql.DatabaseError as e:
+            con.rollback()
+            print(e)
+
+        finally:
+            con.close()# cerramos la conexion de la base de datos 
+            #js=lista()   #retornamos datos de la db para el form del lado del cliente
+            contenido = {"tip1":"Ahorra mas", "tip2":"Cuidado!! "}
+            return render_template('semaforo.html', conte=contenido)
+    else:
+        contenido = {"tip1":"Ahorra mas", "tip2":"Cuidado!! "}
+
+        return render_template('semaforo.html', conte=contenido)
 
 
 def lista():
