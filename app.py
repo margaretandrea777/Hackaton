@@ -379,6 +379,6 @@ def render_i():
 def render_():
     return render_template("7ma.html")
 
-@app.route("/8va.html")
+@app.route("/semaforo.html")
 def render():
-    return render_template("8va.html")
+    return render_template("semaforo.html")
