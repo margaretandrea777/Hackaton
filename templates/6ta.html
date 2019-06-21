@@ -2,24 +2,25 @@
 <body style="background: url('img/fondo.jpg') no-repeat fixed center;">
     <div class="bd-example" style="margin-top:25%">
 
-    <table class="table table-dark">
-            <thead>
-              <tr>
-                <th scope="col">Ingreso p/ persona</th>
-                <th scope="col">Mba'éicha peĩ</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{cantidad}}</td>
-                <td>{{estado}}</td>
-              </tr>
-            </tbody>
-    </table>
+      <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Ingreso p/ persona</th>
+                  <th scope="col">Mba'éicha peĩ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{cantidad}}</td>
+                  <td>{{estado}}</td>
+                </tr>
+              </tbody>
+      </table>
     </div>
     <H1 align="center">
-    <button type="submit" class="btn btn-primary">Oĩma</button>
-  </H1>
+    <a href="/"><button type="submit" class="btn btn-primary">Oĩma</button></a>
+    </H1>
+  {% include "footer.html" %}
 </body>
 </html>
 
